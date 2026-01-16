@@ -22,7 +22,7 @@ class CodexParser:
         root = Path.home() / ".codex/sessions"
         if not root.exists():
             return []
-        return sorted(root.glob("*/rollout.jsonl"))
+        return sorted(root.glob("**/rollout*.jsonl"))
 
     def parse(self, path: Path) -> Session:
         absolute_path = str(path.expanduser().resolve())
