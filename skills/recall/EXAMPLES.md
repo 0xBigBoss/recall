@@ -14,7 +14,7 @@ recall search "oauth login"
 recall search "JWT token"
 ```
 
-### Search Within Tool Calls
+### Search Within Bash Commands
 
 Find bash commands related to git:
 
@@ -23,16 +23,11 @@ recall search "git" --tool Bash
 recall search "rebase" --tool Bash
 ```
 
-Find file edits:
-
-```bash
-recall search "auth.py" --tool Edit
-recall search "config" --tool Read
-```
+The `--tool` flag filters to Bash tool calls only, searching within bash command text.
 
 ### Filter by Source
 
-Search only Claude Code sessions:
+Search only Claude Code sessions (input accepts `claude-code` or `claude_code`):
 
 ```bash
 recall search "refactor" --source claude-code
@@ -43,6 +38,8 @@ Search only Codex sessions:
 ```bash
 recall search "fix bug" --source codex
 ```
+
+Note: Output displays `claude_code` (underscore) in results.
 
 ## Browsing Sessions
 

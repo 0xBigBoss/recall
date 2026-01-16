@@ -33,13 +33,13 @@ recall search <query> [OPTIONS]
 
 | Option | Description |
 |--------|-------------|
-| `--tool` | Filter by tool name (e.g., `Bash`, `Read`, `Edit`) |
+| `--tool` | Filter to Bash tool calls only (searches bash commands) |
 | `--source` | Filter by source: `claude-code` or `codex` |
 | `--json` | Output results as JSON |
 
 **Example output:**
 ```
-[0.85] abc123def456 (claude-code)
+[0.85] abc123def456 (claude_code)
   assistant: Implemented OAuth2 authentication flow using...
   source: ~/.claude/projects/my-app/session.jsonl
   time: 2024-01-15T10:30:00
@@ -62,7 +62,7 @@ recall list [OPTIONS]
 
 **Example output:**
 ```
-[2024-01-15 10:30] abc123 (claude-code) /path/to/repo messages=25 tools=12
+[2024-01-15 10:30] abc123 (claude_code) /path/to/repo messages=25 tools=12
 [2024-01-14 14:22] def456 (codex) /path/to/project messages=8 tools=3
 ```
 
@@ -82,7 +82,7 @@ recall show <session-id> [OPTIONS]
 
 **Example output:**
 ```
-[2024-01-15 10:30] Session abc123def456 (claude-code)
+[2024-01-15 10:30] Session abc123def456 (claude_code)
 Project: /path/to/my-app
 Duration: 1234s | Messages: 25 | Tools: 12
 

@@ -1,7 +1,7 @@
 ---
 name: recall
 description: Search and analyze past Claude Code and Codex sessions. Use when user asks about past sessions, tool usage patterns, bash command history, permission suggestions, or wants to find previous work.
-allowed-tools: Bash, Read, Grep, Glob
+allowed-tools: Bash
 ---
 
 # recall
