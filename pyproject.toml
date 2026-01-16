@@ -1,0 +1,33 @@
+[project]
+name = "recall-workspace"
+version = "0.0.0"
+requires-python = ">=3.12"
+
+[dependency-groups]
+dev = [
+  "recall",
+  "pytest>=7.4",
+  "ruff>=0.3",
+  "pyright>=1.1",
+]
+
+[tool.uv]
+default-groups = ["dev"]
+
+[tool.uv.sources]
+recall = { workspace = true }
+
+[tool.uv.workspace]
+members = ["packages/recall"]
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.pyright]
+pythonVersion = "3.12"
+typeCheckingMode = "strict"
+reportMissingTypeStubs = false
+
+[tool.pytest.ini_options]
+addopts = "-q"
