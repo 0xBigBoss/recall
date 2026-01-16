@@ -12,7 +12,7 @@ Search and analyze past AI agent sessions (Claude Code, Codex).
 
 ```bash
 # Install from GitHub
-uv tool install git+https://github.com/0xbigboss/recall.git
+uv tool install "recall @ git+https://github.com/0xbigboss/recall.git#subdirectory=packages/recall"
 ```
 
 ## Quick Start

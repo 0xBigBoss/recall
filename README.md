@@ -8,7 +8,7 @@ Search past sessions, analyze tool usage patterns, and generate permission sugge
 
 ```bash
 # Install from GitHub
-uv tool install git+https://github.com/0xbigboss/recall.git
+uv tool install "recall @ git+https://github.com/0xbigboss/recall.git#subdirectory=packages/recall"
 
 # Or clone and run locally
 git clone https://github.com/0xbigboss/recall.git
