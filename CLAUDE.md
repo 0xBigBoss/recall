@@ -61,7 +61,7 @@ cli/ → services/ → parsers/ → core/
 | Database | `~/.local/share/recall/recall.duckdb` |
 | Lock file | `~/.local/share/recall/recall.lock` |
 | Claude Code sessions | `~/.claude/projects/**/*.jsonl` |
-| Codex sessions | `~/.codex/sessions/*/rollout.jsonl` |
+| Codex sessions | `~/.codex/sessions/**/rollout*.jsonl` |
 
 ## CLI Commands
 
