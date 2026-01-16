@@ -11,8 +11,8 @@ Search and analyze past AI agent sessions (Claude Code, Codex).
 ## Installation
 
 ```bash
-uvx recall --help          # Run without installing
-uv tool install recall     # Install globally
+# Install from GitHub
+uv tool install git+https://github.com/0xbigboss/recall.git
 ```
 
 ## Quick Start

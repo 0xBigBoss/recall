@@ -7,16 +7,14 @@ Search past sessions, analyze tool usage patterns, and generate permission sugge
 ## Installation
 
 ```bash
-# Run without installing
-uvx recall --help
+# Install from GitHub
+uv tool install git+https://github.com/0xbigboss/recall.git
 
-# Install globally
-uv tool install recall
-
-# Or install from source
+# Or clone and run locally
 git clone https://github.com/0xbigboss/recall.git
 cd recall
 uv sync
+uv run recall --help
 ```
 
 ## Quick Start
