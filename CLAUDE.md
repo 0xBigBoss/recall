@@ -18,7 +18,7 @@ uv run recall search "git" # Search across sessions
 uv sync                    # Install deps (includes dev tools)
 uv run pytest              # Run tests
 uv run ruff check .        # Lint
-uv run pyright             # Type check
+uvx ty check               # Type check
 ```
 
 ## Project Structure
