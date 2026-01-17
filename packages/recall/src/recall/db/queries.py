@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import UTC, datetime
 import json
 from typing import Iterable
 
@@ -89,7 +89,7 @@ def insert_session(conn: duckdb.DuckDBPyConnection, session: Session) -> None:
             session.is_complete,
             session.file_mtime,
             session.file_size,
-            session.indexed_at or datetime.utcnow(),
+            session.indexed_at or datetime.now(UTC),
         ],
     )
 
