@@ -2,10 +2,10 @@ from __future__ import annotations
 
 import typer
 
+from recall.cli.utils import print_json
 from recall.core.types import parse_source
 from recall.db import RecallLockError
 from recall.services import index_sessions
-from recall.cli.utils import print_json
 
 
 def command(
@@ -20,7 +20,7 @@ def command(
         summary = index_sessions(source=src, full=full, recreate=recreate, verbose=verbose)
     except RecallLockError as err:
         typer.echo(f"error: {err}")
-        raise typer.Exit(code=1)
+        raise typer.Exit(code=1) from None
 
     if json_output:
         print_json(summary)

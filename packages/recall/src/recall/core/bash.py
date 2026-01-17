@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 import shlex
+from dataclasses import dataclass
 
 BASH_SUBCOMMAND_TOOLS = {
     "git",

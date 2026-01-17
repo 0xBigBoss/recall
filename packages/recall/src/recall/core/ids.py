@@ -15,7 +15,9 @@ def message_id(session_id_value: str, idx: int) -> str:
     return _sha256_hex(f"{session_id_value}:{idx}")[:16]
 
 
-def tool_call_id(message_id_value: str | None, idx: int, session_id_value: str | None = None) -> str:
+def tool_call_id(
+    message_id_value: str | None, idx: int, session_id_value: str | None = None
+) -> str:
     if message_id_value is not None:
         return _sha256_hex(f"{message_id_value}:{idx}")[:16]
     if session_id_value is None:

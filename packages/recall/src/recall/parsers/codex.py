@@ -1,10 +1,11 @@
 from __future__ import annotations
 
+import json
+from collections.abc import Iterable
 from dataclasses import dataclass
 from datetime import datetime
-import json
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any
 
 from recall.core.bash import parse_bash_command
 from recall.core.ids import message_id as make_message_id
@@ -62,7 +63,8 @@ class CodexParser:
                     payload = entry.get("payload", {})
                     source_session_id = payload.get("id") or source_session_id
                     cwd = payload.get("cwd") or cwd
-                    git_info = payload.get("git", {}) if isinstance(payload.get("git"), dict) else {}
+                    git_raw = payload.get("git")
+                    git_info = git_raw if isinstance(git_raw, dict) else {}
                     git_branch = git_info.get("branch") or git_branch
                     git_repo = git_info.get("root") or git_repo
                     meta_ts = _parse_timestamp(payload.get("timestamp"))

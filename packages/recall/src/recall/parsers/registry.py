@@ -5,7 +5,6 @@ from recall.parsers.claude_code import ClaudeCodeParser
 from recall.parsers.codex import CodexParser
 from recall.parsers.protocol import SessionParser
 
-
 _PARSERS: list[SessionParser] = [ClaudeCodeParser(), CodexParser()]
 
 

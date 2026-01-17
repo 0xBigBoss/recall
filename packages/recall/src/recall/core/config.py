@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
-from pathlib import Path
 import os
 import tomllib
-from typing import Iterable
-
+from collections.abc import Iterable
+from dataclasses import dataclass
+from pathlib import Path
 
 DEFAULT_FTS_FIELDS = ("content", "thinking", "bash")
 VALID_FTS_FIELDS = {"content", "thinking", "bash"}
@@ -16,7 +15,7 @@ class FtsConfig:
     fields: tuple[str, ...] = DEFAULT_FTS_FIELDS
 
     @classmethod
-    def from_values(cls, values: Iterable[str] | None) -> "FtsConfig":
+    def from_values(cls, values: Iterable[str] | None) -> FtsConfig:
         if values is None:
             return cls()
         normalized = tuple(field.strip() for field in values if field.strip())
@@ -37,7 +36,7 @@ class AppConfig:
     fts: FtsConfig
 
     @classmethod
-    def load(cls) -> "AppConfig":
+    def load(cls) -> AppConfig:
         home = Path.home()
         default_data_dir = Path(os.environ.get("RECALL_DATA_DIR", home / ".local/share/recall"))
         default_config_path = Path(

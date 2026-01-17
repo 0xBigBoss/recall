@@ -57,10 +57,7 @@ def bash(
         typer.echo("Suggested Bash Permissions")
         typer.echo("=" * 26)
         for suggestion in suggestions:
-            typer.echo(
-                f"{suggestion.confidence}: {suggestion.pattern} "
-                f"({suggestion.count} uses)"
-            )
+            typer.echo(f"{suggestion.confidence}: {suggestion.pattern} ({suggestion.count} uses)")
         if skipped:
             typer.echo("Skipped")
             for item in skipped:

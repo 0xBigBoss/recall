@@ -18,7 +18,7 @@ def command(
         results = search_service(query=query, source=src, tool=tool, limit=20)
     except RuntimeError as err:
         typer.echo(f"error: {err}")
-        raise typer.Exit(code=1)
+        raise typer.Exit(code=1) from None
     if json_output:
         print_json(results)
         return

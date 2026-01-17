@@ -4,9 +4,8 @@ import json
 import shutil
 from pathlib import Path
 
-from typer.testing import CliRunner
-
 from recall.cli.app import app
+from typer.testing import CliRunner
 
 
 def test_cli_smoke(tmp_path, monkeypatch) -> None:
@@ -22,11 +21,7 @@ def test_cli_smoke(tmp_path, monkeypatch) -> None:
         Path(__file__).resolve().parents[2] / "fixtures" / "claude_code" / "session1.jsonl"
     )
     codex_fixture = (
-        Path(__file__).resolve().parents[2]
-        / "fixtures"
-        / "codex"
-        / "session1"
-        / "rollout.jsonl"
+        Path(__file__).resolve().parents[2] / "fixtures" / "codex" / "session1" / "rollout.jsonl"
     )
 
     shutil.copy(claude_fixture, claude_target / "session1.jsonl")

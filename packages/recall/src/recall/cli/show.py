@@ -21,9 +21,9 @@ def command(
     typer.echo(f"[{started}] Session {session.id} ({session.source.value})")
     if session.git_repo or session.cwd:
         typer.echo(f"Project: {session.git_repo or session.cwd}")
-    typer.echo(
-        f"Duration: {session.duration_seconds or 0}s | Messages: {session.message_count} | Tools: {session.tool_count}"
-    )
+    duration = session.duration_seconds or 0
+    msg_count, tool_count = session.message_count, session.tool_count
+    typer.echo(f"Duration: {duration}s | Messages: {msg_count} | Tools: {tool_count}")
     typer.echo("")
 
     for message in session.messages:

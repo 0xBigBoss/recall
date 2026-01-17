@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from datetime import UTC, datetime
 import json
-from typing import Iterable
+from collections.abc import Iterable
+from datetime import UTC, datetime
 
 import duckdb
 

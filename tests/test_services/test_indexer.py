@@ -4,7 +4,6 @@ import shutil
 from pathlib import Path
 
 import duckdb
-
 from recall.services.indexer import index_sessions
 
 
@@ -21,11 +20,7 @@ def test_indexer_indexes_sessions(tmp_path, monkeypatch) -> None:
         Path(__file__).resolve().parents[2] / "fixtures" / "claude_code" / "session1.jsonl"
     )
     codex_fixture = (
-        Path(__file__).resolve().parents[2]
-        / "fixtures"
-        / "codex"
-        / "session1"
-        / "rollout.jsonl"
+        Path(__file__).resolve().parents[2] / "fixtures" / "codex" / "session1" / "rollout.jsonl"
     )
 
     shutil.copy(claude_fixture, claude_target / "session1.jsonl")
@@ -38,12 +33,12 @@ def test_indexer_indexes_sessions(tmp_path, monkeypatch) -> None:
     db_path = tmp_path / ".local/share/recall" / "recall.duckdb"
     conn = duckdb.connect(str(db_path))
     try:
-        sessions = conn.execute("SELECT COUNT(*) FROM sessions").fetchone()[0]
-        messages = conn.execute("SELECT COUNT(*) FROM messages").fetchone()[0]
-        tool_calls = conn.execute("SELECT COUNT(*) FROM tool_calls").fetchone()[0]
-        assert sessions == 2
-        assert messages == 7
-        assert tool_calls == 3
+        sessions_row = conn.execute("SELECT COUNT(*) FROM sessions").fetchone()
+        messages_row = conn.execute("SELECT COUNT(*) FROM messages").fetchone()
+        tool_calls_row = conn.execute("SELECT COUNT(*) FROM tool_calls").fetchone()
+        assert sessions_row is not None and sessions_row[0] == 2
+        assert messages_row is not None and messages_row[0] == 7
+        assert tool_calls_row is not None and tool_calls_row[0] == 3
     finally:
         conn.close()
 

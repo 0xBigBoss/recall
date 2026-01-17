@@ -2,8 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import datetime
-
-import duckdb
+from typing import Any
 
 from recall.core.config import AppConfig
 from recall.core.models import Message, Session, ToolCall
@@ -81,8 +80,10 @@ def load_session(session_id: str, *, include_tools: bool) -> Session:
     try:
         session_row = conn.execute(
             """
-            SELECT id, source, source_path, source_session_id, started_at, ended_at, duration_seconds,
-                   model, cwd, git_repo, git_branch, message_count, tool_count, input_tokens,
+            SELECT id, source, source_path, source_session_id,
+                   started_at, ended_at, duration_seconds,
+                   model, cwd, git_repo, git_branch,
+                   message_count, tool_count, input_tokens,
                    output_tokens, is_complete, file_mtime, file_size, indexed_at
             FROM sessions
             WHERE id = ?
@@ -179,12 +180,18 @@ def load_session(session_id: str, *, include_tools: bool) -> Session:
         conn.close()
 
 
-def _parse_tool_input(value: object) -> object:
+def _parse_tool_input(value: object) -> dict[str, Any] | None:
+    if value is None:
+        return None
+    if isinstance(value, dict):
+        return value  # type: ignore[return-value]
     if isinstance(value, str):
         try:
             import json
 
-            return json.loads(value)
+            parsed = json.loads(value)
+            if isinstance(parsed, dict):
+                return parsed
         except json.JSONDecodeError:
-            return value
-    return value
+            pass
+    return None

@@ -8,7 +8,6 @@ dev = [
   "recall",
   "pytest>=7.4",
   "ruff>=0.3",
-  "pyright>=1.1",
 ]
 
 [tool.uv]
@@ -22,12 +21,12 @@ members = ["packages/recall"]
 
 [tool.ruff]
 line-length = 100
+
+[tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
 
-[tool.pyright]
-pythonVersion = "3.12"
-typeCheckingMode = "strict"
-reportMissingTypeStubs = false
+[tool.ty.environment]
+python-version = "3.12"
 
 [tool.pytest.ini_options]
 addopts = "-q"

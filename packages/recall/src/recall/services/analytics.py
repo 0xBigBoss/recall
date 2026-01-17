@@ -7,7 +7,6 @@ import duckdb
 from recall.core.config import AppConfig
 from recall.db import connect
 
-
 DANGEROUS_BASES = {
     "rm",
     "sudo",
@@ -68,14 +67,15 @@ def overview() -> OverviewStats:
         sessions = _count(conn, "sessions")
         messages = _count(conn, "messages")
         tool_calls = _count(conn, "tool_calls")
-        bash_calls = conn.execute(
+        bash_row = conn.execute(
             "SELECT COUNT(*) FROM tool_calls WHERE bash_command IS NOT NULL"
-        ).fetchone()[0]
+        ).fetchone()
+        bash_calls = int(bash_row[0]) if bash_row else 0
         return OverviewStats(
             sessions=sessions,
             messages=messages,
             tool_calls=tool_calls,
-            bash_calls=int(bash_calls),
+            bash_calls=bash_calls,
         )
     finally:
         conn.close()
@@ -198,10 +198,7 @@ def token_usage(limit: int = 50) -> list[tuple[str | None, int, int]]:
             """,
             [limit],
         ).fetchall()
-        return [
-            (row[0], int(row[1] or 0), int(row[2] or 0))
-            for row in rows
-        ]
+        return [(row[0], int(row[1] or 0), int(row[2] or 0)) for row in rows]
     finally:
         conn.close()
 

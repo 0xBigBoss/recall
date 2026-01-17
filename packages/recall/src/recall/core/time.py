@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from datetime import datetime, timedelta, timezone
 import re
+from datetime import UTC, datetime, timedelta
 
 _DURATION_RE = re.compile(r"^(\d+)([smhdw])$")
 
@@ -14,7 +14,7 @@ def parse_since(value: str, now: datetime | None = None) -> datetime:
         amount = int(match.group(1))
         unit = match.group(2)
         delta = _duration_delta(amount, unit)
-        base = now or datetime.now(timezone.utc)
+        base = now or datetime.now(UTC)
         return base - delta
 
     try:
@@ -23,8 +23,8 @@ def parse_since(value: str, now: datetime | None = None) -> datetime:
         raise ValueError(f"invalid since value: {value}") from err
 
     if parsed.tzinfo is None:
-        parsed = parsed.replace(tzinfo=timezone.utc)
-    return parsed.astimezone(timezone.utc)
+        parsed = parsed.replace(tzinfo=UTC)
+    return parsed.astimezone(UTC)
 
 
 def _duration_delta(amount: int, unit: str) -> timedelta:

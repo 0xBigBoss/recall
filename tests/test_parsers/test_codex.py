@@ -6,7 +6,8 @@ from recall.parsers.codex import CodexParser
 
 
 def test_codex_parser_parses_orphans() -> None:
-    fixture = Path(__file__).resolve().parents[2] / "fixtures" / "codex" / "session1" / "rollout.jsonl"
+    fixture_dir = Path(__file__).resolve().parents[2] / "fixtures" / "codex" / "session1"
+    fixture = fixture_dir / "rollout.jsonl"
     parser = CodexParser()
     session = parser.parse(fixture)
 

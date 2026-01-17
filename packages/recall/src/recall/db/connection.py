@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from contextlib import contextmanager
-from datetime import datetime
-from pathlib import Path
 import os
+from contextlib import contextmanager
+from datetime import UTC, datetime
+from pathlib import Path
 
 import duckdb
 
@@ -48,7 +48,7 @@ def connect(config: AppConfig, *, recreate: bool = False) -> duckdb.DuckDBPyConn
 def _backup_database(db_path: Path) -> None:
     if not db_path.exists():
         return
-    timestamp = datetime.utcnow().strftime("%Y%m%d%H%M%S")
+    timestamp = datetime.now(UTC).strftime("%Y%m%d%H%M%S")
     backup_path = db_path.with_suffix(f".bak-{timestamp}")
     os.replace(db_path, backup_path)
     wal_path = db_path.with_suffix(db_path.suffix + ".wal")

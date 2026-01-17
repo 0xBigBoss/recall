@@ -1,10 +1,11 @@
 from __future__ import annotations
 
+import json
+from collections.abc import Iterable
 from dataclasses import dataclass
 from datetime import datetime
-import json
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any
 
 from recall.core.bash import parse_bash_command
 from recall.core.ids import message_id as make_message_id
