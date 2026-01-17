@@ -16,6 +16,7 @@ uv run recall search "git" # Search across sessions
 
 ```bash
 uv sync                    # Install deps (includes dev tools)
+uv run lefthook install    # Set up git hooks
 uv run pytest              # Run tests
 uv run ruff check .        # Lint
 uvx ty check               # Type check

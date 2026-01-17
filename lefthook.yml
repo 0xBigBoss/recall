@@ -1,0 +1,15 @@
+pre-commit:
+  parallel: true
+  commands:
+    format:
+      run: uv run ruff format --check .
+    lint:
+      run: uv run ruff check .
+
+pre-push:
+  parallel: true
+  commands:
+    typecheck:
+      run: uvx ty check
+    test:
+      run: uv run pytest -q
