@@ -1,5 +1,7 @@
 # recall
 
+[![CI](https://github.com/0xBigBoss/recall/actions/workflows/ci.yml/badge.svg)](https://github.com/0xBigBoss/recall/actions/workflows/ci.yml)
+
 Session recall and analytics for AI agents (Claude Code, Codex).
 
 Search past sessions, analyze tool usage patterns, and generate permission suggestions from your AI coding history.
