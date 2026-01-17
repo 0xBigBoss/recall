@@ -48,7 +48,12 @@ def fetch_session_state(
 
 def delete_session(conn: duckdb.DuckDBPyConnection, session_id: str) -> None:
     # Delete in order: tool_calls -> messages -> sessions (no CASCADE in DuckDB)
+    # Delete tool_calls by session_id AND by message_id to handle FK constraints
     conn.execute("DELETE FROM tool_calls WHERE session_id = ?", [session_id])
+    conn.execute(
+        "DELETE FROM tool_calls WHERE message_id IN (SELECT id FROM messages WHERE session_id = ?)",
+        [session_id],
+    )
     conn.execute("DELETE FROM messages WHERE session_id = ?", [session_id])
     conn.execute("DELETE FROM sessions WHERE id = ?", [session_id])
 
