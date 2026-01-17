@@ -73,7 +73,7 @@ The skill auto-triggers on prompts like "search my past sessions" or "suggest pe
 |------|------|
 | Database | `~/.local/share/recall/recall.duckdb` |
 | Claude Code sessions | `~/.claude/projects/**/*.jsonl` |
-| Codex sessions | `~/.codex/sessions/*/rollout.jsonl` |
+| Codex sessions | `~/.codex/sessions/**/rollout*.jsonl` |
 
 ## Development
 
@@ -81,8 +81,11 @@ The skill auto-triggers on prompts like "search my past sessions" or "suggest pe
 uv sync                    # Install dependencies
 uv run pytest              # Run tests
 uv run ruff check .        # Lint
-uv run pyright             # Type check
+uvx ty check               # Type check
 ```
+
+Git hooks (format, lint, typecheck, test) auto-install via [direnv](https://direnv.net/).
+Without direnv: `uv run lefthook install`
 
 ## License
 
