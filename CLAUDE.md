@@ -23,6 +23,10 @@ uvx ty check               # Type check
 
 Git hooks auto-install via direnv. Without direnv: `uv run lefthook install`
 
+## Release
+
+See `RELEASE.md` for version bump and GitHub release steps.
+
 ## Project Structure
 
 ```
