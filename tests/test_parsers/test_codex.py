@@ -57,3 +57,15 @@ def test_codex_parser_response_item_tool_calls() -> None:
     exec2 = session.orphan_tool_calls[3]
     assert exec2.tool_name == "exec_command"
     assert exec2.bash_command == "git status"
+
+
+def test_codex_parser_response_item_shell_command_alias() -> None:
+    fixture_dir = Path(__file__).resolve().parents[2] / "fixtures" / "codex" / "session3"
+    fixture = next(fixture_dir.glob("rollout-*.jsonl"))
+    parser = CodexParser()
+    session = parser.parse(fixture)
+
+    assert len(session.orphan_tool_calls) == 1
+    shell_call = session.orphan_tool_calls[0]
+    assert shell_call.tool_name == "shell_command"
+    assert shell_call.bash_command == "echo hello"

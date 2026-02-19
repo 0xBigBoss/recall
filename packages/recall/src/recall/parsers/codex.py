@@ -288,7 +288,7 @@ def _build_tool_call(tool_name: str, tool_input: Any) -> ToolCall:
 
 
 def _extract_bash_command(tool_name: str, tool_input: Any) -> str | None:
-    if tool_name.lower() not in {"bash", "shell", "exec_command"}:
+    if tool_name.lower() not in {"bash", "shell", "exec_command", "shell_command"}:
         return None
     if isinstance(tool_input, str):
         return tool_input
