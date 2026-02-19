@@ -97,6 +97,29 @@ class CodexParser:
                         tool_input = payload.get("parameters")
                         tool_call = _build_tool_call(tool_name, tool_input)
                         orphan_tool_calls.append(tool_call)
+                elif entry_type == "response_item":
+                    payload = entry.get("payload", {})
+                    payload_type = payload.get("type")
+                    if payload_type == "function_call":
+                        tool_name = str(payload.get("name", ""))
+                        tool_input = _parse_function_call_arguments(payload.get("arguments"))
+                        orphan_tool_calls.append(_build_tool_call(tool_name, tool_input))
+                    elif payload_type == "custom_tool_call":
+                        tool_name = str(payload.get("name", ""))
+                        raw_input = payload.get("input")
+                        tool_input: dict[str, Any] | str | None = (
+                            raw_input if isinstance(raw_input, (dict, str)) else None
+                        )
+                        orphan_tool_calls.append(_build_tool_call(tool_name, tool_input))
+                    elif payload_type == "web_search_call":
+                        action = payload.get("action", {})
+                        url = action.get("url") if isinstance(action, dict) else None
+                        orphan_tool_calls.append(
+                            _build_tool_call(
+                                "web_search",
+                                {"url": url} if url else None,
+                            )
+                        )
                 elif entry_type == "message":
                     payload = entry.get("payload", {})
                     role_value = payload.get("role", "user")
@@ -233,6 +256,20 @@ def _extract_content_blocks(content: Any) -> tuple[list[str], list[str], list[To
     return text_parts, thinking_parts, tool_calls
 
 
+def _parse_function_call_arguments(raw: Any) -> dict[str, Any] | None:
+    """Parse a JSON-encoded arguments string from a Codex function_call."""
+    if isinstance(raw, dict):
+        return raw
+    if isinstance(raw, str):
+        try:
+            parsed = json.loads(raw)
+            if isinstance(parsed, dict):
+                return parsed
+        except (json.JSONDecodeError, ValueError):
+            pass
+    return None
+
+
 def _build_tool_call(tool_name: str, tool_input: Any) -> ToolCall:
     bash_command = _extract_bash_command(tool_name, tool_input)
     parsed = parse_bash_command(bash_command) if bash_command else None
@@ -251,7 +288,7 @@ def _build_tool_call(tool_name: str, tool_input: Any) -> ToolCall:
 
 
 def _extract_bash_command(tool_name: str, tool_input: Any) -> str | None:
-    if tool_name.lower() not in {"bash", "shell"}:
+    if tool_name.lower() not in {"bash", "shell", "exec_command"}:
         return None
     if isinstance(tool_input, str):
         return tool_input
