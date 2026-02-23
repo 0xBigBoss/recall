@@ -5,6 +5,8 @@ pre-commit:
       run: uv run ruff format --check .
     lint:
       run: uv run ruff check .
+    release-metadata-sync:
+      run: uv run pytest -q tests/test_release_metadata.py
 
 pre-push:
   parallel: true

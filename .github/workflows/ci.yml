@@ -30,5 +30,8 @@ jobs:
       - name: Type check
         run: uvx ty check
 
+      - name: Release metadata sync
+        run: uv run pytest -q tests/test_release_metadata.py
+
       - name: Test
         run: uv run pytest
