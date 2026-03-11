@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS schema_version (
 
 CREATE TABLE IF NOT EXISTS sessions (
     id TEXT PRIMARY KEY,
-    source TEXT NOT NULL CHECK (source IN ('claude_code', 'codex')),
+    source TEXT NOT NULL CHECK (source IN ('claude_code', 'codex', 'pi_agent')),
     source_path TEXT UNIQUE NOT NULL,
     source_session_id TEXT,
 

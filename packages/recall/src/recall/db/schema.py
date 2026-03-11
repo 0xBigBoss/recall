@@ -4,7 +4,7 @@ from pathlib import Path
 
 import duckdb
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 
 
 def ensure_schema(conn: duckdb.DuckDBPyConnection) -> None:

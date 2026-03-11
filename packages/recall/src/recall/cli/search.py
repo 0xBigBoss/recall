@@ -10,7 +10,7 @@ from recall.services import search as search_service
 def command(
     query: str = typer.Argument(..., help="Search query"),
     tool: str | None = typer.Option(None, "--tool", help="Filter by tool name"),
-    source: str | None = typer.Option(None, "--source", help="claude-code or codex"),
+    source: str | None = typer.Option(None, "--source", help="claude-code, codex, or pi-agent"),
     json_output: bool = typer.Option(False, "--json", help="JSON output"),
 ) -> None:
     src = parse_source(source) if source else None

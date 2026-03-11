@@ -10,7 +10,7 @@ from recall.services import index_sessions
 
 def command(
     full: bool = typer.Option(False, "--full", help="Force full reindex"),
-    source: str | None = typer.Option(None, "--source", help="claude-code or codex"),
+    source: str | None = typer.Option(None, "--source", help="claude-code, codex, or pi-agent"),
     recreate: bool = typer.Option(False, "--recreate", help="Backup and rebuild database"),
     verbose: bool = typer.Option(False, "--verbose", "-v", help="Verbose logging"),
     json_output: bool = typer.Option(False, "--json", help="JSON output"),

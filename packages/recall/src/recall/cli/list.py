@@ -9,7 +9,7 @@ from recall.services import list_sessions
 
 
 def command(
-    source: str | None = typer.Option(None, "--source", help="claude-code or codex"),
+    source: str | None = typer.Option(None, "--source", help="claude-code, codex, or pi-agent"),
     since: str | None = typer.Option(None, "--since", help="Time window (7d, 24h, 2024-01-01)"),
     project: str | None = typer.Option(None, "--project", help="Filter by git repo path"),
     json_output: bool = typer.Option(False, "--json", help="JSON output"),

@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/0xBigBoss/recall/actions/workflows/ci.yml/badge.svg)](https://github.com/0xBigBoss/recall/actions/workflows/ci.yml)
 
-Session recall and analytics for AI agents (Claude Code, Codex).
+Session recall and analytics for AI agents (Claude Code, Codex, Pi Agent).
 
 Search past sessions, analyze tool usage patterns, and generate permission suggestions from your AI coding history.
 
@@ -46,7 +46,7 @@ recall stats bash --suggest  # Permission suggestions
 
 | Command | Description |
 |---------|-------------|
-| `recall index` | Index sessions from Claude Code and Codex |
+| `recall index` | Index sessions from Claude Code, Codex, and Pi Agent |
 | `recall search <query>` | Full-text search across sessions |
 | `recall list` | List sessions with filters |
 | `recall show <id>` | Display session details |
@@ -76,6 +76,7 @@ The skill auto-triggers on prompts like "search my past sessions" or "suggest pe
 | Database | `~/.local/share/recall/recall.duckdb` |
 | Claude Code sessions | `~/.claude/projects/**/*.jsonl` |
 | Codex sessions | `~/.codex/sessions/**/rollout*.jsonl` |
+| Pi Agent sessions | `~/.pi/agent/sessions/**/*.jsonl` |
 
 ## Development
 

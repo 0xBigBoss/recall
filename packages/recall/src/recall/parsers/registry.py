@@ -3,9 +3,10 @@ from __future__ import annotations
 from recall.core.types import Source
 from recall.parsers.claude_code import ClaudeCodeParser
 from recall.parsers.codex import CodexParser
+from recall.parsers.pi_agent import PiAgentParser
 from recall.parsers.protocol import SessionParser
 
-_PARSERS: list[SessionParser] = [ClaudeCodeParser(), CodexParser()]
+_PARSERS: list[SessionParser] = [ClaudeCodeParser(), CodexParser(), PiAgentParser()]
 
 
 def all_parsers() -> list[SessionParser]:
